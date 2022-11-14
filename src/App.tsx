@@ -4,9 +4,13 @@ import { Header } from './components/header/Header';
 import { Categories } from './components/categories/Categories';
 import { Sort } from './components/sort/Sort';
 import { PizzaBlock } from './components/pizzaBlock/PizzaBlock';
+import pizzas from './assets/pizzas.json';
+import { PizzaType } from './components/pizzaBlock/types';
 
 
-export const App = () => (<div className="wrapper">
+export const App = () => {
+
+  return (<div className="wrapper">
     <Header/>
     <div className="content">
       <div className="container">
@@ -16,18 +20,11 @@ export const App = () => (<div className="wrapper">
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
-          <PizzaBlock/>
-          <PizzaBlock/>
-          <PizzaBlock/>
-          <PizzaBlock/>
-          <PizzaBlock/>
-          <PizzaBlock/>
-          <PizzaBlock/>
-          <PizzaBlock/>
-          <PizzaBlock/>
+          { pizzas.map((pizza: PizzaType) => (<PizzaBlock key={ pizza.id } pizza={ pizza }/>)) }
         </div>
       </div>
     </div>
   </div>);
+};
 
 

@@ -1,27 +1,46 @@
-export const PizzaBlock = () => {
-  return (
-    <div className="pizza-block">
+import { PizzaType } from './types';
+import { useState } from 'react';
+
+type PizzaBlockType = {
+  pizza: PizzaType
+}
+
+const typeNamesPizzas = ['тонкое', 'традиционое'];
+
+export const PizzaBlock = ({pizza}: PizzaBlockType) => {
+  const {id, imageUrl, name, types, sizes, price, category, rating} = pizza;
+
+  const [activeTypePizza, setActiveTypePizza] = useState(0);
+  const [activeSizePizza, setActiveSizePizza] = useState(0);
+
+  return (<div className="pizza-block">
     <img
       className="pizza-block__image"
-      src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+      src={ imageUrl }
       alt="Pizza"
     />
-    <h4 className="pizza-block__title">Чизбургер-пицца</h4>
+    <h4 className="pizza-block__title">{ name }</h4>
     <div className="pizza-block__selector">
       <ul>
-        <li className="active">тонкое</li>
-        <li>традиционное</li>
+        { types.map((type, index) => (
+          <li key={ index }
+              className={activeTypePizza === index ? 'active' : ''}
+              onClick={()=>setActiveTypePizza(index)}>
+            { typeNamesPizzas[type] }
+          </li>)) }
       </ul>
       <ul>
-        <li className="active">26 см.
-        </li>
-        <li>30 см.</li>
-        <li>40 см.</li>
+        { sizes.map((size, index) => (
+          <li key={ index }
+              className={activeSizePizza === index ? 'active' : ''}
+              onClick={()=>setActiveSizePizza(index)}>
+            { size } см.
+          </li>)) }
       </ul>
     </div>
     <div className="pizza-block__bottom">
-      <div className="pizza-block__price">от 395 ₽</div>
-      <div className="button button--outline button--add">
+      <div className="pizza-block__price">от { price } ₽</div>
+      <button className="button button--outline button--add">
         <svg
           width="12"
           height="12"
@@ -36,7 +55,7 @@ export const PizzaBlock = () => {
         </svg>
         <span>Добавить</span>
         <i>2</i>
-      </div>
+      </button>
     </div>
   </div>);
 };
