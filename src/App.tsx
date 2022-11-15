@@ -3,7 +3,8 @@ import { Header } from './components/header/Header';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import {Routes, Route} from 'react-router-dom'
-import { CartItem } from './pages/CartItem';
+import { Cart } from './pages/Cart';
+
 //https://637364870bb6b698b60aad81.mockapi.io/items
 
 export const App = () => {
@@ -14,7 +15,7 @@ export const App = () => {
 				<div className='container'>
 					<Routes>
 						<Route path='/' element={<Home />} />
-						<Route path='/cart' element={<CartItem />} />
+						<Route path='/cart' element={<Cart />} />
 						<Route path='*' element={<NotFound/>} />
 					</Routes>
 				</div>
