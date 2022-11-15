@@ -1,10 +1,10 @@
 import './scss/app.scss';
 import { Header } from './components/header/Header';
-import { Categories } from './components/categories/Categories';
-import { Sort } from './components/sort/Sort';
-import { PizzaBlock } from './components/pizzaBlock/PizzaBlock';
-import pizzas from './assets/pizzas.json';
-import { PizzaType } from './components/pizzaBlock/types';
+import { Home } from './pages/Home';
+import { NotFound } from './pages/NotFound';
+import {Routes, Route} from 'react-router-dom'
+import { CartItem } from './pages/CartItem';
+//https://637364870bb6b698b60aad81.mockapi.io/items
 
 export const App = () => {
 	return (
@@ -12,16 +12,11 @@ export const App = () => {
 			<Header />
 			<div className='content'>
 				<div className='container'>
-					<div className='content__top'>
-						<Categories />
-						<Sort />
-					</div>
-					<h2 className='content__title'>Все пиццы</h2>
-					<div className='content__items'>
-						{pizzas.map((pizza: PizzaType) => (
-							<PizzaBlock key={pizza.id} pizza={pizza} />
-						))}
-					</div>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/cart' element={<CartItem />} />
+						<Route path='*' element={<NotFound/>} />
+					</Routes>
 				</div>
 			</div>
 		</div>
