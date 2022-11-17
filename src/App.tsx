@@ -5,8 +5,6 @@ import { NotFound } from './pages/NotFound';
 import {Routes, Route} from 'react-router-dom'
 import { Cart } from './pages/Cart';
 
-//https://637364870bb6b698b60aad81.mockapi.io/items
-
 export const App = () => {
 	return (
 		<div className='wrapper'>
