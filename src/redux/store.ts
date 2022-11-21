@@ -3,7 +3,7 @@ import { pizzaReducer } from './slices/piazzaSlice';
 
 export const store = configureStore({
 	reducer: {
-		pizza:pizzaReducer,
+		pizza: pizzaReducer
 	}
 });
 

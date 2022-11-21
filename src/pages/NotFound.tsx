@@ -4,7 +4,7 @@ import { NotFoundBlock } from '../components/notFoundBlock';
 export const NotFound = () => {
 	return (
 		<div>
-			<NotFoundBlock/>
+			<NotFoundBlock />
 		</div>
 	);
 };

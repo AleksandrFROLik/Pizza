@@ -14,7 +14,7 @@ interface PizzaState {
 const initialState: PizzaState = {
 	isLoading: true,
 	pizza: [],
-	error: '',
+	error: ''
 };
 
 export const pizzaSlice = createSlice({
@@ -24,14 +24,19 @@ export const pizzaSlice = createSlice({
 		fetching(state) {
 			state.isLoading = true;
 		},
-		fetchPizzaGet(state, action: PayloadAction<PizzaPayload>) {
-			state.pizza = action.payload.pizza
-			state.isLoading = false
-			state.error = ''
+		fetchPizzaAll(state, action: PayloadAction<PizzaPayload>) {
+			state.pizza = action.payload.pizza;
+			state.isLoading = false;
+			state.error = '';
 		},
-		fetchError(state, action:PayloadAction<Error>) {
-			state.isLoading = false
-			state.error = action.payload.message
+		fetchCategoryPizza(state, action:PayloadAction<PizzaPayload>) {
+			state.pizza = action.payload.pizza;
+			state.isLoading = false;
+			state.error = '';
+		},
+		fetchError(state, action: PayloadAction<Error>) {
+			state.isLoading = false;
+			state.error = action.payload.message;
 		}
 	}
 });

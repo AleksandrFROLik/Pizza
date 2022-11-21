@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import {useMemo, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { fetchCategoryPizza} from '../../redux/actions/fetchCatigoryPizza';
+
+
 
 export const Categories = () => {
 	const [activeCategory, setActiveCategory] = useState(0);
 
+	const dispatch = useAppDispatch();
 	const categories = [
 		'Все',
 		'Мясные',
@@ -12,6 +17,11 @@ export const Categories = () => {
 		'Закрытые'
 	];
 
+	const handleCategoryPizza = useMemo(()=> ( index: number ) => {
+		setActiveCategory(index);
+		dispatch(fetchCategoryPizza(index));
+	},[activeCategory]);
+
 	return (
 		<div className='categories'>
 			<ul>
@@ -19,7 +29,7 @@ export const Categories = () => {
 					<li
 						key={category}
 						className={activeCategory === index ? 'active' : ''}
-						onClick={() => setActiveCategory(index)}
+						onClick={() => handleCategoryPizza(index)}
 					>
 						{category}
 					</li>
