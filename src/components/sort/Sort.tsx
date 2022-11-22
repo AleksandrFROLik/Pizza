@@ -1,13 +1,32 @@
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { setSort } from '../../redux/slices/filterSlice';
+
+type ListSort = {
+	name: string;
+	sortProperty: string;
+};
 
 export const Sort = () => {
 	const [toggleSortPopup, setToggleSortPopup] = useState(false);
-	const listSorts = ['популярности', 'цене', 'алфавиту'];
-	const [selectedListSort, setSelectedListSort] = useState(0);
-	const sortName = listSorts[selectedListSort];
+	const listSorts = [
+		{ name: 'популярности', sortProperty: 'rating' },
+		{ name: 'цене', sortProperty: 'price' },
+		{
+			name: 'алфавиту',
+			sortProperty: 'title'
+		}
+	];
 
-	const handleSelected = (index: number) => {
-		setSelectedListSort(index);
+	// const [selectedListSort, setSelectedListSort] = useState(0);
+	// const sortName = listSorts[selectedListSort];
+
+	const dispatch = useAppDispatch();
+	const sort = useAppSelector(state => state.filter.sort);
+
+	const handleSelected = (value: ListSort) => {
+		dispatch(setSort(value));
+		// setSelectedListSort(index);
 		setToggleSortPopup(false);
 	};
 
@@ -27,9 +46,7 @@ export const Sort = () => {
 					/>
 				</svg>
 				<b>Сортировка по:</b>
-				<span onClick={() => setToggleSortPopup(!toggleSortPopup)}>
-					{sortName}
-				</span>
+				<span onClick={() => setToggleSortPopup(!toggleSortPopup)}>{sort.name}</span>
 			</div>
 			{toggleSortPopup && (
 				<div className='sort__popup'>
@@ -37,10 +54,10 @@ export const Sort = () => {
 						{listSorts.map((listSort, index) => (
 							<li
 								key={index}
-								className={selectedListSort === index ? 'active' : ''}
-								onClick={() => handleSelected(index)}
+								className={sort.sortProperty === listSort.sortProperty ? 'active' : ''}
+								onClick={() => handleSelected(listSort)}
 							>
-								{listSort}
+								{listSort.name}
 							</li>
 						))}
 					</ul>

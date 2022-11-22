@@ -1,12 +1,10 @@
-import {useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { fetchCategoryPizza} from '../../redux/actions/fetchCatigoryPizza';
-
-
+import { fetchCategoryPizza } from '../../redux/actions/fetchCatigoryPizza';
+import { setCategoryId } from '../../redux/slices/filterSlice';
 
 export const Categories = () => {
-	const [activeCategory, setActiveCategory] = useState(0);
-
+	const categoryId = useAppSelector(state => state.filter.categoryId);
 	const dispatch = useAppDispatch();
 	const categories = [
 		'Все',
@@ -17,10 +15,13 @@ export const Categories = () => {
 		'Закрытые'
 	];
 
-	const handleCategoryPizza = useMemo(()=> ( index: number ) => {
-		setActiveCategory(index);
-		dispatch(fetchCategoryPizza(index));
-	},[activeCategory]);
+	const handleCategoryPizza = useMemo(
+		() => (index: number) => {
+			dispatch(setCategoryId(index));
+			dispatch(fetchCategoryPizza(index));
+		},
+		[categoryId]
+	);
 
 	return (
 		<div className='categories'>
@@ -28,7 +29,7 @@ export const Categories = () => {
 				{categories.map((category, index) => (
 					<li
 						key={category}
-						className={activeCategory === index ? 'active' : ''}
+						className={categoryId === index ? 'active' : ''}
 						onClick={() => handleCategoryPizza(index)}
 					>
 						{category}
