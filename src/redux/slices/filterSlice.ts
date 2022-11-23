@@ -6,6 +6,7 @@ interface FilterState {
 		name: string;
 		sortProperty: string;
 	};
+	searchValue: string
 }
 
 const initialState: FilterState = {
@@ -13,7 +14,8 @@ const initialState: FilterState = {
 	sort: {
 		name: 'популярности',
 		sortProperty: 'price'
-	}
+	},
+	searchValue: '',
 };
 export const filterSlice = createSlice({
 	name: 'filter',
@@ -24,8 +26,11 @@ export const filterSlice = createSlice({
 		},
 		setSort(state, action) {
 			state.sort = action.payload;
+		},
+		searchPizza(state, action) {
+			state.searchValue = action.payload
 		}
 	}
 });
-export const { setCategoryId, setSort } = filterSlice.actions;
+export const { setCategoryId, setSort, searchPizza } = filterSlice.actions;
 export const filterReducer = filterSlice.reducer;

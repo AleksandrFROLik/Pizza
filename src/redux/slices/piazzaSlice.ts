@@ -7,13 +7,13 @@ type PizzaPayload = {
 
 interface PizzaState {
 	isLoading: boolean;
-	pizza: PizzaType[];
+	pizzas: PizzaType[];
 	error: string;
 }
 
 const initialState: PizzaState = {
 	isLoading: true,
-	pizza: [],
+	pizzas: [],
 	error: ''
 };
 
@@ -25,12 +25,12 @@ export const pizzaSlice = createSlice({
 			state.isLoading = true;
 		},
 		fetchPizzaAll(state, action: PayloadAction<PizzaPayload>) {
-			state.pizza = action.payload.pizza;
+			state.pizzas = action.payload.pizza;
 			state.isLoading = false;
 			state.error = '';
 		},
 		fetchCategoryPizza(state, action:PayloadAction<PizzaPayload>) {
-			state.pizza = action.payload.pizza;
+			state.pizzas = action.payload.pizza;
 			state.isLoading = false;
 			state.error = '';
 		},

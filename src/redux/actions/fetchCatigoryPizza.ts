@@ -3,6 +3,8 @@ import { instance } from '../../axios/axios';
 import { pizzaSlice } from '../slices/piazzaSlice';
 import { PizzaType } from '../../components/pizzaBlock/types';
 
+
+
 export const fetchCategoryPizza =  (value: number) => {
 	return async ( dispatch: AppDispatch) => {
 		try {

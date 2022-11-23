@@ -1,7 +1,20 @@
-import React from 'react';
 import styles from './Search.module.scss';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import { useDispatch } from 'react-redux';
+import { searchPizza } from '../../redux/slices/filterSlice';
 
 export const Search = () => {
+	const dispatch = useDispatch();
+	const searchValue = useAppSelector(state => state.filter.searchValue);
+	//const inputEl = useRef();
+
+	const onClickClear = () => {
+		dispatch(searchPizza(''));
+		//inputEl.current.focus()
+	};
+
+	const handleOnChange = (event: string) => dispatch(searchPizza(event));
+
 	return (
 		<div className={styles.root}>
 			<svg
@@ -39,17 +52,23 @@ export const Search = () => {
 				/>
 			</svg>
 			<input
+				value={searchValue}
 				type='text'
+				//ref={inputEl}
 				className={styles.input}
+				onChange={e => handleOnChange(e.currentTarget.value)}
 				placeholder='search pizza...'
 			/>
-			<svg
-				className={styles.clearIcon}
-				viewBox="0 0 20 20"
-				xmlns="http://www.w3.org/2000/svg">
-				<path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
-			</svg>
+			{searchValue && (
+				<svg
+					onClick={onClickClear}
+					className={styles.clearIcon}
+					viewBox='0 0 20 20'
+					xmlns='http://www.w3.org/2000/svg'
+				>
+					<path d='M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z' />
+				</svg>
+			)}
 		</div>
 	);
 };
-

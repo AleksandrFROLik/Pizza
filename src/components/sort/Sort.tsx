@@ -12,21 +12,15 @@ export const Sort = () => {
 	const listSorts = [
 		{ name: 'популярности', sortProperty: 'rating' },
 		{ name: 'цене', sortProperty: 'price' },
-		{
-			name: 'алфавиту',
-			sortProperty: 'title'
-		}
+		{ name: 'алфавиту', sortProperty: 'title' }
 	];
 
-	// const [selectedListSort, setSelectedListSort] = useState(0);
-	// const sortName = listSorts[selectedListSort];
 
 	const dispatch = useAppDispatch();
 	const sort = useAppSelector(state => state.filter.sort);
 
-	const handleSelected = (value: ListSort) => {
-		dispatch(setSort(value));
-		// setSelectedListSort(index);
+	const handleSelected = (listSort: ListSort) => {
+		dispatch(setSort(listSort));
 		setToggleSortPopup(false);
 	};
 
