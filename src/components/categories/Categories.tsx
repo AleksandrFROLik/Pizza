@@ -15,9 +15,9 @@ export const Categories = () => {
 	];
 
 	const handleCategoryPizza = (index: number) => {
-			dispatch(setCategoryId(index));
-			dispatch(fetchCategoryPizza(index));
-		}
+		dispatch(setCategoryId(index));
+		dispatch(fetchCategoryPizza(index));
+	};
 
 	return (
 		<div className='categories'>

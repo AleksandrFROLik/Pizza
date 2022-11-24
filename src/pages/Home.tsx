@@ -10,16 +10,16 @@ import { fetchPizza } from '../redux/actions/fetchPizza';
 
 export const Home = () => {
 	const { isLoading, pizzas, error } = useAppSelector(state => state.pizza);
-	const {sort, categoryId, searchValue } = useAppSelector(state => state.filter);
+	const { sort, categoryId, searchValue } = useAppSelector(
+		state => state.filter
+	);
 	const defaultPizzas = [...new Array(8)];
 	const dispatch = useAppDispatch();
-
 
 	const sortBy = sort.sortProperty.replace('-', '');
 	const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
 	const category = categoryId > 0 ? String(categoryId) : '';
 	const search = searchValue;
-
 
 	useEffect(() => {
 		dispatch(fetchPizza());
