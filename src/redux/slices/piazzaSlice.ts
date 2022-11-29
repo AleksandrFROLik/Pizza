@@ -29,7 +29,7 @@ export const pizzaSlice = createSlice({
 			state.isLoading = false;
 			state.error = '';
 		},
-		fetchCategoryPizza(state, action:PayloadAction<PizzaPayload>) {
+		fetchCategoryPizza(state, action: PayloadAction<PizzaPayload>) {
 			state.pizzas = action.payload.pizza;
 			state.isLoading = false;
 			state.error = '';
