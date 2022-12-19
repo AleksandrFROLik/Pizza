@@ -12,12 +12,12 @@ export const Categories = () => {
 		'Гриль',
 		'Острые',
 		'Закрытые'
-	];
+	]
 
 	const handleCategoryPizza = (index: number) => {
 		dispatch(setCategoryId(index));
 		dispatch(fetchCategoryPizza(index));
-	};
+	}
 
 	return (
 		<div className='categories'>
